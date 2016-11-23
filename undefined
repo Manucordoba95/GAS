@@ -1,0 +1,83 @@
+function myFunction() {
+  //Entorno:
+  var sheet = SpreadsheetApp.getActiveSheet();
+  var fila = sheet.getActiveCell().getRow();
+  
+  var tipoCliente = sheet.getRange("B" + fila).getValue();   
+  var nomb = sheet.getRange("C" + fila).getValue();
+  var apes = sheet.getRange("D" + fila).getValue();
+  var nIdent = sheet.getRange("E" + fila).getValue();
+  var clave = sheet.getRange("F" + fila).getValue();
+  var naccion = sheet.getRange("G" + fila).getValue();
+  var accPosesion = sheet.getRange("H" + fila).getValue();
+  var correo = sheet.getRange("I" + fila).getValue();
+  
+  var hora;
+  var enlaceNAltas = "https://goo.gl/forms/TWqQxaEQo9y2qBH13";
+  var enlaceRenovaciones;
+  var enlaceAcciones;
+  
+  
+  //Algoritmo:
+  
+  if (tipoCliente == "No abonado"){
+   var mensaje = "Buenas primer lugar le queremos dar las gracias por ponerse en contacto con el Real Betis y su campaña de abonados de la temporada 2016/17."
+      +" Según el formulario que rellenó, nos dirigimos al aficionado "+nomb+" "+apes+", de no ser así por favor si va a proceder con el proceso de nueva alta indique el"
+        +" nombre de la persona que va a solicitar dicho servicio. Nos Complace comunicarle que este año tenemos unos precios altamente atractivos para un abonado de nueva alta  "
+        +"además nos complace anunciarle que en esta campaña de abonados contará con los nuevos precios del nuevo Gol sur con grandes descuentos y grandes ventajas para nuevas altas"
+        +" En este correo le adjuntaremos un enlace al que le redirigirá al proceso de nuevas altas del Real Betis, Gracias por su atención. "+enlaceNAltas
+        +" "
+        +"Atentamente el servicio para nuevas altas del Real Betis Balompié."
+          
+        
+        // Envio correo con adjunto de precios
+        var file = DriveApp.getFileById('19QPB4yxLjnLFnxWnmuRzAmHoJy95wNmRI5La0TjOzkY/');
+         MailApp.sendEmail(correo, "Campaña abonados 2016/17 Real betis ", mensaje,{
+          name: 'Precio abonos altas y renovaciones (No abonados) ',
+      attachments: [file.getAs(MimeType.PDF)]});
+        
+    
+    
+    
+    
+  }//FinSi
+  
+
+    if (tipoCliente == "Abonado del Real Betis"){
+     var mensaje = "Buenas en primer lugar señor abonado del Real Betis Balompié S.A.D, queremos darle las gracias por ponerse en contacto con el Betis y su campaña de abonados de la temporada"
+      +" 2016/2017, Según el formulario que rellenó, nos dirigimos al abonado"+nomb+" "+apes+", de no ser así, por favor si va a proceder con el proceso de renovación de abono indique el"
+      +" nombre y apellidos de la persona que va a solicitar dicho servicio. Nos complace anunciarle que para esta temporada tenemos unos precios de renovación altamente atractivos"
+      +" Esta temporada también se pone en marcha la renovación y venta de nuevas localidades en el nuevo Gol sur con grandes precios para los ya aficionado abonados al Real Betis Balompié."
+      +" En este correo le adjuntaremos un enlace al que le redirigirá al proceso de renovaciones del Real Betis además se le adjunta una lista de precios y areas de renovacuno en el estadio, Grarias por su atención."+enlaceRenovaciones
+      +" "
+      + "Atentamente el servicio de renovaciones del Real Betis Balompié."
+      
+      //Envio correo para abonados al Real Betis
+      // Envio correo con adjunto de precios
+        var file = DriveApp.getFileById('19QPB4yxLjnLFnxWnmuRzAmHoJy95wNmRI5La0TjOzkY/');
+         MailApp.sendEmail(correo, "Campaña abonados 2016/17 Real betis ", mensaje,{
+          name: 'Precio abonos altas y renovaciones (No abonados) ',
+      attachments: [file.getAs(MimeType.PDF)]});
+      
+      }//FinSi
+  
+      if(tipoCliente == "Accionista del Real Betis"){
+      var  mensaje = "Buenas en primer lugar señor accionista del Real Betis Balompié S.A.D.Don "+nomb+" "+apes+" queremos darle las gracias por participar en el concurso de accionestas y acciones del Real Betis"
+        +" este correo le transmitirá toda la información acerca de las acciones y los señores accionistas del Real Betis para la temporada 2016/17 a continuación le adjuntamos un enace "
+        +" con el cual podrá renovar sus acciones, una vez renovadas recibirá otro correo con información detallada acerca de los señores accionistas del Real Betis, este es un programa especial para los señores"
+        +" accionistas del Real Betis, si no es usted accionista del Real Betis no podrá realizar el siguiente proceso que se adjunta en el siguiente enlace:"+enlaceAcciones+
+         + " "
+        + "Atentamente el servicio de renovaciones del Real Betis Balompié."
+        
+        //Envio correo para accionistas Real Betis
+        GmailApp.sendEmail(correo, "Accionistas Real Betis Balompié S.A.D.", mensaje);
+    }//FinSi
+
+  
+
+
+  
+  //Envira email
+  //GmailApp.sendEmail(correo, "Campaña abonos 2016/17 Real Betis", mensaje);
+  
+}//FinFuncion
